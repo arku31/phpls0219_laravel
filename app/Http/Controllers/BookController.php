@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Book;
 use App\Http\Requests\BookRequest;
+use App\Mail\BookCreated;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class BookController extends Controller
 {
@@ -18,6 +20,11 @@ class BookController extends Controller
         return view('books.index', [
             'books' => $books
         ]);
+    }
+
+    public function publicapi()
+    {
+        return Book::all();
     }
 
     /**
@@ -34,7 +41,8 @@ class BookController extends Controller
      */
     public function store(BookRequest $request)
     {
-        Book::create($request->all());
+        $book = Book::create($request->all());
+        Mail::to(\Auth::user())->send(new BookCreated(['book' => $book]));
 
         return redirect()->route('books');
     }

@@ -28,3 +28,5 @@ Route::group(['prefix' => '/cms/books', 'middleware' => ['auth']], function () {
     Route::get('destroy/{id}', 'BookController@destroy')->name('books.destroy');
 
 });
+
+Route::get('/api/books', 'BookController@publicapi');

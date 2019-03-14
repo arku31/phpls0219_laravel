@@ -6,7 +6,7 @@
  */
 
 require('./bootstrap');
-
+console.log('Hello');
 window.Vue = require('vue');
 
 /**
