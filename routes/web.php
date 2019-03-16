@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['prefix' => '/cms/books', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => '/cms/books', 'middleware' => ['auth', 'group']], function () {
     Route::get('/', 'BookController@index')->name('books');
     Route::get('create', 'BookController@create')->name('books.create');
     Route::post('store', 'BookController@store')->name('books.store');
